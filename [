@@ -1,0 +1,44 @@
+#bin/bash
+
+cd ~/.local/src/
+
+sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 -y
+
+rm -rf alacritty
+git clone https://github.com/alacritty/alacritty.git
+cd alacritty
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source ~/.cargo/env
+
+rustup override set stable
+rustup update stable
+
+cargo build --release
+
+cp target/release/alacritty ~/.local/bin/
+
+CMD="alacritty"
+KEY="<Primary><Shift>t"
+
+PATH_ID="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom_alacritty/"
+SCHEMA="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$PATH_ID"
+
+# Set properties
+gsettings set "$SCHEMA" name 'Alacritty'
+gsettings set "$SCHEMA" command "$CMD"
+gsettings set "$SCHEMA" binding "$KEY"
+
+# Update global custom keybindings list
+CURRENT=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+
+if [[ "$CURRENT" != *"$PATH_ID"* ]]; then
+    if [[ "$CURRENT" == "@as []" || "$CURRENT" == "[]" ]]; then
+        NEW_LIST="['$PATH_ID']"
+    else
+        # Extract existing paths, format array, append new path
+        CLEAN=$(echo "$CURRENT" | tr -d "[]'" | sed 's/, /,/g')
+        NEW_LIST="['$(echo "$CLEAN" | sed "s|,|', '|g")\', '$PATH_ID']"
+    fi
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "$NEW_LIST"
+fi
