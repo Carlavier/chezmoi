@@ -3,3 +3,7 @@ bind '"\C-h": backward-kill-word'
 if [ -n "$ALACRITTY_WINDOW_ID" ] && [ -z "$TMUX" ] && command -v tmux &> /dev/null; then
     exec tmux new-session -A -s main
 fi
+
+setup() {
+    ~/.local/bin/custom-scripts/setup-workspaces.sh
+}
