@@ -14,6 +14,7 @@ SCRIPTS=(
     "docker.sh"
     "pnpm.sh"
     "opencode.sh"
+    "keymaps.sh"
 )
 
 SUCCESS=()
