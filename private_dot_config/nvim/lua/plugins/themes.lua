@@ -2,6 +2,8 @@ return {
   {
     "sirzif/tzfn.nvim",
     name = "tzfn",
+    -- priority = 1000,
+    -- lazy = fasle,
     -- config = function()
     --   vim.cmd("colorscheme tzfn")
     -- end,
@@ -9,6 +11,8 @@ return {
   {
     "Abstract-IDE/Abstract-cs",
     name = "abscs",
+    -- priority = 1000,
+    -- lazy = fasle,
     -- config = function()
     --   vim.cmd("colorscheme abscs")
     -- end,
@@ -17,9 +21,10 @@ return {
   {
     "uncleTen276/dark_flat.nvim",
     priority = 1000,
+    lazy = false,
     config = function()
       vim.cmd("colorscheme dark_flat")
-      vim.api.nvim_set_hl(0, "Normal", { bg = "#0b0b0b" })
+      vim.api.nvim_set_hl(0, "Normal", { fg = "#ffffff", bg = "#0b0b0b" })
       vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#777777" })
       vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#777777" })
     end,
@@ -27,6 +32,8 @@ return {
   {
     "rockyzhang24/arctic.nvim",
     dependencies = { "rktjmp/lush.nvim" },
+    -- priority = 1000,
+    -- lazy = fasle,
     -- config = function()
     --   vim.cmd("colorscheme arctic")
     -- end,
@@ -34,7 +41,8 @@ return {
   },
   {
     "zootedb0t/citruszest.nvim",
-    priority = 1000,
+    -- priority = 1000,
+    -- lazy = fasle,
     -- config = function()
     --   vim.cmd("colorscheme citruszest")
     -- end,

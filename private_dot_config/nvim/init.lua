@@ -19,10 +19,10 @@ require("lazy").setup({
     { import = "plugins" },
   },
   ui = { border = "rounded" },
-}, {
   rocks = {
-    enabled = false,
-  }
+    hererocks = false,
+    enabled = true,
+  },
 })
 
 require("configs")

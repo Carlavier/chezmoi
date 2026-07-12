@@ -163,7 +163,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = { "fd", "--type", "f", "--type", "d", "--hidden", "--strip-cwd-prefix" },
+          find_command = { "fdfind", "--type", "f", "--type", "d", "--hidden", "--strip-cwd-prefix" },
           entry_maker = folder_icon_entry_maker({ cwd = vim.fn.getcwd() }),
         },
         live_grep = {
@@ -190,7 +190,7 @@ return {
       local config_path = vim.fn.stdpath("config")
       builtin.find_files({
         cwd = config_path,
-        find_command = { "fd", "--type", "f", "--type", "d", "--hidden", "--strip-cwd-prefix" },
+        find_command = { "fdfind", "--type", "f", "--type", "d", "--hidden", "--strip-cwd-prefix" },
         entry_maker = folder_icon_entry_maker({ cwd = config_path }),
       })
     end, { desc = "Search Neovim Config" })
