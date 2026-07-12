@@ -17,6 +17,7 @@ SCRIPTS=(
     "super-p-keymap.sh"
     "startup-screen.sh"
     "startup-speaker.sh"
+    "gnome-settings.sh"
 )
 
 SUCCESS=()
