@@ -1,22 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
+STATE_FILE="$HOME/.config/screen_layout_state"
 
-# Function to switch GNOME workspaces safely
-switch_workspace() {
-    local index=$1
-    busctl call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s \
-        "Main.wm.showWorkspace(global.workspace_manager.get_workspace_by_index($index));" > /dev/null 2>&1
-}
+echo "single" > "$STATE_FILE"
 
-# --- STEP 1: FORCE WORKSPACE 1 FOCUS ---
-# Ensure your desktop shifts to the first workspace right away
-switch_workspace 0
-sleep 0.3
+sleep 5
 
-# --- STEP 2: LAUNCH THE SINGLE FIREFOX WINDOW ---
-# Start exactly ONE Firefox instance
-firefox &
+gdbus call --session --dest org.gnome.Mutter.DisplayConfig --object-path /org/gnome/Mutter/DisplayConfig --method org.freedesktop.DBus.Properties.Set org.gnome.Mutter.DisplayConfig PowerSaveMode "<int32 0>" >/dev/null
 
-# --- STEP 3: WAIT AND CONFIRM ---
-# Sleep to give the application enough time to fully paint the window 
-# and lock system focus onto itself before the script ends.
-sleep 2.5
+STATE=$(gdbus call --session --dest org.gnome.Mutter.DisplayConfig --object-path /org/gnome/Mutter/DisplayConfig --method org.gnome.Mutter.DisplayConfig.GetCurrentState)
+SERIAL=$(echo "$STATE" | grep -oE "uint32 [0-9]+" | head -n1 | awk '{print $2}')
+
+if [ -n "$SERIAL" ]; then
+    gdbus call --session --dest org.gnome.Mutter.DisplayConfig --object-path /org/gnome/Mutter/DisplayConfig --method org.gnome.Mutter.DisplayConfig.ApplyMonitorsConfig "$SERIAL" 1 "[(0, 0, 1.0, 0, true, [('HDMI-1', '1920x1080@100.000', [])])]" "{}" >/dev/null
+fi
