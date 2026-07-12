@@ -14,7 +14,7 @@ SCRIPTS=(
     "docker.sh"
     "pnpm.sh"
     "opencode.sh"
-    "keymaps.sh"
+    "super-p-keymap.sh"
     "startup-screen.sh"
     "startup-speaker.sh"
 )
