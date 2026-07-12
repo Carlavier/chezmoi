@@ -15,6 +15,8 @@ SCRIPTS=(
     "pnpm.sh"
     "opencode.sh"
     "keymaps.sh"
+    "startup-screen.sh"
+    "startup-speaker.sh"
 )
 
 SUCCESS=()
