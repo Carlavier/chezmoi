@@ -7,3 +7,7 @@ fi
 setup() {
     ~/.local/bin/custom-scripts/setup-workspaces.sh
 }
+
+offscreen() {
+    ~/.local/bin/custom-scripts/screen-off.sh
+}

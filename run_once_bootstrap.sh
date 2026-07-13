@@ -18,6 +18,7 @@ SCRIPTS=(
     "startup-screen.sh"
     "startup-speaker.sh"
     "gnome-settings.sh"
+    "custom-scripts-deps.sh"
 )
 
 SUCCESS=()
