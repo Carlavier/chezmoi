@@ -19,6 +19,7 @@ SCRIPTS=(
     "startup-speaker.sh"
     "gnome-settings.sh"
     "custom-scripts-deps.sh"
+    "nvm.sh"
 )
 
 SUCCESS=()
@@ -46,3 +47,5 @@ printf "%s\n" "${SUCCESS[@]}"
 
 echo -e "\n${RED}Failed:${NC}"
 printf "${RED}%s\n${NC}" "${FAILED[@]}"
+
+printf "\nReboot device to make sure everything is registered!"

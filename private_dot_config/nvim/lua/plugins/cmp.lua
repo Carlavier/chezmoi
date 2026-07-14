@@ -3,7 +3,8 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
   },
-  version = "v0.*",
+  version = "v1.*",
+  build = "download",
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -17,8 +18,8 @@ return {
         auto_show = true,
         draw = {
           columns = {
-            { "label", "label_description", gap = 1 },
-            { "kind_icon", "kind", gap = 1 },
+            { "label",     "label_description", gap = 1 },
+            { "kind_icon", "kind",              gap = 1 },
           },
         },
       },
@@ -26,7 +27,12 @@ return {
         auto_show = true,
         auto_show_delay_ms = 0,
       },
-      list = { selection = { preselect = false, auto_insert = true } },
+      list = {
+        selection = { preselect = false, auto_insert = true },
+      },
+    },
+    fuzzy = {
+      sorts = { "score", "kind", "label" },
     },
     keymap = {
       preset = "default",
