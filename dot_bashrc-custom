@@ -1,6 +1,10 @@
 bind '"\C-h": backward-kill-word'
 
-if [ -n "$ALACRITTY_WINDOW_ID" ] && [ -z "$TMUX" ] && command -v tmux &> /dev/null; then
+if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && command -v tmux &> /dev/null; then
+    CLIENT_IP=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+    SESSION_NAME="ssh-${CLIENT_IP//[\.:]/-}"
+    exec tmux new-session -A -s "$SESSION_NAME"
+elif [ -n "$ALACRITTY_WINDOW_ID" ] && [ -z "$TMUX" ] && command -v tmux &> /dev/null; then
     exec tmux new-session -A -s main
 fi
 
