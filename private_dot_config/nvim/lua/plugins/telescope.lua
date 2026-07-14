@@ -8,6 +8,7 @@ return {
 	},
 	keys = {
 		{ "<leader>sf", desc = "Search Files" },
+		{ "<leader>[",  desc = "which_key_ignore" },
 		{ "<leader>sg", desc = "Search by Grep" },
 		{ "<leader>sb", desc = "Search Buffers" },
 		{ "<leader>sh", desc = "Search Help" },
