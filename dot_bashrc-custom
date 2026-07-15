@@ -15,3 +15,5 @@ setup() {
 offscreen() {
     ~/.local/bin/custom-scripts/screen-off.sh
 }
+
+eval "$(zoxide init bash --cmd cd)"

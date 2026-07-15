@@ -20,6 +20,7 @@ SCRIPTS=(
     "gnome-settings.sh"
     "custom-scripts-deps.sh"
     "nvm.sh"
+    "zoxide.sh"
 )
 
 SUCCESS=()
