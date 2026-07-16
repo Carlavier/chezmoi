@@ -1,0 +1,15 @@
+0000000000000000000000000000000000000000 a4c95cd19f1ccc5bfe223a693e9c3291c6445ee5 Carlavier <namto10042004@gmail.com> 1778305405 +0700	commit (initial): [add] new config
+a4c95cd19f1ccc5bfe223a693e9c3291c6445ee5 a4c95cd19f1ccc5bfe223a693e9c3291c6445ee5 Carlavier <namto10042004@gmail.com> 1778305421 +0700	Branch: renamed refs/heads/master to refs/heads/main
+a4c95cd19f1ccc5bfe223a693e9c3291c6445ee5 cf203646f60dd26399eec3cf0fc4cd9cc83d2046 Carlavier <namto10042004@gmail.com> 1778471819 +0700	pull origin main: Fast-forward
+cf203646f60dd26399eec3cf0fc4cd9cc83d2046 18a6f9eb0fd9f5229d7027b4b3c2270f2db74883 Carlavier <namto10042004@gmail.com> 1778549027 +0700	pull origin main: Fast-forward
+18a6f9eb0fd9f5229d7027b4b3c2270f2db74883 354eaf10406f08914ab8cdd02309b9c0ea5c2290 Carlavier <namto10042004@gmail.com> 1778579368 +0700	commit: [modify] ricing nvim
+354eaf10406f08914ab8cdd02309b9c0ea5c2290 8e323840256acdc1d8b7c595fc0aef79710f868f Carlavier <namto10042004@gmail.com> 1778579726 +0700	commit: [modify] blink cmp
+8e323840256acdc1d8b7c595fc0aef79710f868f 212879abba06cb3b00ed8499c147b3f8de27ff56 Carlavier <namto10042004@gmail.com> 1778636223 +0700	pull origin main: Fast-forward
+212879abba06cb3b00ed8499c147b3f8de27ff56 6f30adc01d2fb7c8e341a026ddae566e924194bc Carlavier <namto10042004@gmail.com> 1778651772 +0700	commit: [modify] neovim configs
+6f30adc01d2fb7c8e341a026ddae566e924194bc bfed0ae2960ca9aecf71d99decd50e418b1160b8 Carlavier <namto10042004@gmail.com> 1778660777 +0700	commit: [modify] config
+bfed0ae2960ca9aecf71d99decd50e418b1160b8 fce7a75771a2503efe788ac12f26ae6185af9718 Carlavier <namto10042004@gmail.com> 1778721621 +0700	commit: [add] copilot plugins
+fce7a75771a2503efe788ac12f26ae6185af9718 5df9f98e006bc4bb32001fd90eb9426c9d9e68b0 Carlavier <namto10042004@gmail.com> 1778945851 +0700	commit: [modify] config
+5df9f98e006bc4bb32001fd90eb9426c9d9e68b0 e5675ed168210dcafc2a6d5d2e233a5494f4efcb Carlavier <namto10042004@gmail.com> 1781770224 +0700	pull origin main: Fast-forward
+e5675ed168210dcafc2a6d5d2e233a5494f4efcb d4033d32135ff05f6b8d317ec8b5e9b2052a0f86 Carlavier <namto10042004@gmail.com> 1782372562 +0700	commit: [modify] fix conform fallback formatter
+d4033d32135ff05f6b8d317ec8b5e9b2052a0f86 75eb023dd53f9eada46fced7f0f33899d2c62be3 Carlavier <namto10042004@gmail.com> 1782891899 +0700	commit: [modify] config
+75eb023dd53f9eada46fced7f0f33899d2c62be3 40d5aa8010ba5ba86e6d8116e18950deaaf4b374 Carlavier <namto10042004@gmail.com> 1782892228 +0700	pull --rebase origin main (finish): refs/heads/main onto 0bbf2ece0fb43dbd9728cb2594054b59ff50e7b3
