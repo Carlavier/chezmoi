@@ -17,3 +17,53 @@ offscreen() {
 }
 
 eval "$(zoxide init bash --cmd cd)"
+
+stream() {
+    # Early return check
+    if [ -z "$1" ]; then
+        echo "Usage: stream <video-filename>"
+        echo "Example: stream lefish"
+        return 1
+    fi
+
+    local f="$HOME/Videos/streaming/$1.mp4"
+    
+    # Check if the file actually exists before doing anything
+    if [ ! -f "$f" ]; then
+        echo "Error: File $f not found!"
+        return 1
+    fi
+
+    # Start audio in background and save PID
+    ffplay -nodisp -autoexit "$f" >/dev/null 2>&1 &
+    local pid=$!
+    
+    # Kill audio PID if Ctrl+C is pressed
+    trap "kill $pid 2>/dev/null" INT
+    
+    # Run video in foreground
+    timg -V "$f"
+    
+    # Cleanup on normal exit
+    kill $pid 2>/dev/null
+    trap - INT
+}
+
+stream_ssh() {
+    # Early check
+    if [ -z "$1" ]; then return 1; fi
+    
+    # Path
+    local f="$HOME/Videos/streaming/$1.mp4"
+    if [ ! -f "$f" ]; then echo "Video '$1.mp4' not found."; return 1; fi
+
+    # Stream (with stdin redirected to prevent Exit 123)
+    PULSE_SERVER=tcp:localhost:4713 ffplay -nodisp -autoexit -loglevel quiet "$f" </dev/null &
+    local play_pid=$!
+
+    # Run the video in the foreground
+    timg -V "$f"
+
+    # Clean up the audio process when the video finishes
+    kill $play_pid 2>/dev/null
+}

@@ -22,4 +22,4 @@ export NVIM_PYTHON3_HOST_PROG="/usr/bin/python3"
 "$HOME/.local/bin/nvim" --headless -e "+Lazy! build telescope-fzf-native.nvim" +qa || true
 "$HOME/.local/bin/nvim" --headless -e +"MasonInstall basedpyright clangd emmet-language-server lua-language-server vtsls" +qa || true
 
-sudo apt install cowsay fortune
+sudo apt install cowsay fortune chafa timg
