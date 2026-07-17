@@ -1,149 +1,123 @@
 local servers = {
-	lua_ls = {
-		settings = {
-			Lua = {
-				diagnostics = { global = { "vim" } },
-			},
-		},
-	},
+  lua_ls = {
+    root_markers = { '.luarc.json', '.luarc.jsonc', '.git', 'init.lua' },
+    single_file_support = false,
+    settings = {
+      Lua = {
+        diagnostics = { globals = { 'vim' } },
+      },
+    },
+  },
 
-	vtsls = {
-		settings = {
-			vtsls = {
-				format = { enable = false },
-			},
-		},
-	},
+  vtsls = {
+    settings = {
+      vtsls = {
+        format = { enable = false },
+      },
+    },
+  },
 
-	emmet_language_server = {
-		filetypes = {
-			"css",
-			"html",
-			"javascriptreact",
-			"less",
-			"sass",
-			"scss",
-			"typescriptreact",
-			"vue",
-		},
-	},
+  emmet_language_server = {
+    filetypes = {
+      'css',
+      'html',
+      'javascriptreact',
+      'less',
+      'sass',
+      'scss',
+      'typescriptreact',
+      'vue',
+    },
+  },
 
-	clangd = {
-		cmd = {
-			"clangd",
-			"--background-index",
-			"--clang-tidy",
-			"--header-insertion=iwyu",
-			"--completion-style=detailed",
-			"--function-arg-placeholders",
-			"--fallback-style=llvm",
-		},
-		init_options = {
-			usePlaceholders = true,
-			completeUnimported = true,
-			clangdFileStatus = true,
-		},
-	},
+  clangd = {
+    cmd = {
+      'clangd',
+      '--background-index',
+      '--clang-tidy',
+      '--header-insertion=iwyu',
+      '--completion-style=detailed',
+      '--function-arg-placeholders',
+      '--fallback-style=llvm',
+    },
+    init_options = {
+      usePlaceholders = true,
+      completeUnimported = true,
+      clangdFileStatus = true,
+    },
+  },
 
-	basedpyright = {
-		-- cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
-		cmd = {
-			vim.fn.stdpath("data") .. "/mason/bin/basedpyright-langserver",
-			"--stdio",
-		},
-		settings = {
-			basedpyright = {
-				analysis = {
-					extraPaths = { "src" },
-					autoImportCompletions = true,
-					indexing = true,
-					diagnosticMode = "workspace",
-					autoSearchPaths = true,
-					useLibraryCodeForTypes = true,
-					typeCheckingMode = "basic",
-				},
-			},
-		},
-	},
+  basedpyright = {
+    cmd = {
+      vim.fn.stdpath('data') .. '/mason/bin/basedpyright-langserver',
+      '--stdio',
+    },
+    settings = {
+      basedpyright = {
+        analysis = {
+          extraPaths = { 'src' },
+          autoImportCompletions = true,
+          indexing = true,
+          diagnosticMode = 'workspace',
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = 'basic',
+        },
+      },
+    },
+  },
 }
 
 return {
-	{
-		"mason-org/mason.nvim",
-		config = function()
-			require("mason").setup({
-				ui = {
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
-				},
-			})
-		end,
-	},
+  {
+    'mason-org/mason.nvim',
+    config = function()
+      require('mason').setup({
+        ui = {
+          icons = {
+            package_installed = '✓',
+            package_pending = '➜',
+            package_uninstalled = '✗',
+          },
+        },
+      })
+    end,
+  },
 
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(event)
-					local opts = { buffer = event.buf }
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(event)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = event.buf, desc = 'Go to definition' })
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = event.buf, desc = 'Go to declaration' })
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = event.buf, desc = 'Go to implementation' })
+          vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { buffer = event.buf, desc = 'Go to type definition' })
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = event.buf, desc = 'List references' })
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = event.buf, desc = 'Hover documentation' })
+          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'Signature help' })
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = event.buf, desc = 'Rename symbol' })
+          vim.keymap.set(
+            { 'n', 'v' },
+            '<leader>ca',
+            vim.lsp.buf.code_action,
+            { buffer = event.buf, desc = 'Code actions' }
+          )
 
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Go to definition" })
-					vim.keymap.set(
-						"n",
-						"gD",
-						vim.lsp.buf.declaration,
-						{ buffer = event.buf, desc = "Go to declaration" }
-					)
-					vim.keymap.set(
-						"n",
-						"gi",
-						vim.lsp.buf.implementation,
-						{ buffer = event.buf, desc = "Go to implementation" }
-					)
-					vim.keymap.set(
-						"n",
-						"go",
-						vim.lsp.buf.type_definition,
-						{ buffer = event.buf, desc = "Go to type definition" }
-					)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = event.buf, desc = "List references" })
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover documentation" })
-					vim.keymap.set(
-						"n",
-						"<C-k>",
-						vim.lsp.buf.signature_help,
-						{ buffer = event.buf, desc = "Signature help" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>rn",
-						vim.lsp.buf.rename,
-						{ buffer = event.buf, desc = "Rename symbol" }
-					)
-					vim.keymap.set(
-						{ "n", "v" },
-						"<leader>ca",
-						vim.lsp.buf.code_action,
-						{ buffer = event.buf, desc = "Code actions" }
-					)
+          vim.keymap.set('n', '<leader>th', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end, { buffer = event.buf, desc = 'Toggle inlay hints' })
+        end,
+      })
 
-					vim.keymap.set("n", "<leader>th", function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-					end, { buffer = event.buf, desc = "Toggle inlay hints" })
-				end,
-			})
+      vim.env.PATH = vim.fn.stdpath('data') .. '/mason/bin:' .. vim.env.PATH
 
-			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			for server_name, config in pairs(servers) do
-				config.capabilities = capabilities
-				vim.lsp.config(server_name, config)
-				vim.lsp.enable(server_name)
-			end
-		end,
-	},
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      for server_name, config in pairs(servers) do
+        config.capabilities = capabilities
+        vim.lsp.config(server_name, config)
+        vim.lsp.enable(server_name)
+      end
+    end,
+  },
 }

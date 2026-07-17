@@ -14,6 +14,5 @@ FixNamespaceComments: true
 IndentCaseLabels: true
 PointerAlignment: Left
 IndentWidth: 4
-AccessModifierOffset: -2
 UseTab: Never
 TabWidth: 4

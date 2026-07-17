@@ -1,19 +1,20 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  event = "VeryLazy",
+  'nvim-treesitter/nvim-treesitter',
+  branch = 'main',
+  build = ':TSUpdate',
+  event = { 'BufReadPost', 'BufNewFile' },
   opts = {
     ensure_installed = {
-      "cpp",
-      "typescript",
-      "javascript",
-      "tsx",
-      "html",
-      "css",
-      "python",
-      "lua",
-      "vim",
-      "vimdoc",
+      'cpp',
+      'typescript',
+      'javascript',
+      'tsx',
+      'html',
+      'css',
+      'python',
+      'lua',
+      'vim',
+      'vimdoc',
     },
     auto_install = true,
     highlight = {
@@ -22,6 +23,6 @@ return {
     },
   },
   config = function(_, opts)
-    require("nvim-treesitter").setup(opts)
+    require('nvim-treesitter.config').setup(opts)
   end,
 }
