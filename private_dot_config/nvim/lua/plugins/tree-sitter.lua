@@ -1,15 +1,28 @@
 return {
-  -- We don't need external plugins anymore since Tree-sitter is fixed!
-  -- This hooks directly into Neovim 0.12's native comment engine.
-  dir = vim.fn.stdpath('config'),
-  name = 'native_tsx_comments',
-  config = function()
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = { 'typescriptreact', 'javascriptreact' },
-      callback = function()
-        -- Directly assigns the TSX structural query rule to the buffer
-        vim.bo.commentstring = '{/* %s */}'
-      end,
-    })
+  'nvim-treesitter/nvim-treesitter',
+  branch = 'main',
+  build = ':TSUpdate',
+  event = { 'BufReadPost', 'BufNewFile' },
+  opts = {
+    ensure_installed = {
+      'cpp',
+      'typescript',
+      'javascript',
+      'tsx',
+      'html',
+      'css',
+      'python',
+      'lua',
+      'vim',
+      'vimdoc',
+    },
+    auto_install = true,
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
+  },
+  config = function(_, opts)
+    require('nvim-treesitter.config').setup(opts)
   end,
 }
