@@ -1,10 +1,10 @@
 return {
-  "saghen/blink.cmp",
+  'saghen/blink.cmp',
   dependencies = {
-    "rafamadriz/friendly-snippets",
+    'rafamadriz/friendly-snippets',
   },
-  version = "v1.*",
-  build = "download",
+  version = 'v1.*',
+  build = 'download',
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -18,8 +18,8 @@ return {
         auto_show = true,
         draw = {
           columns = {
-            { "label",     "label_description", gap = 1 },
-            { "kind_icon", "kind",              gap = 1 },
+            { 'label', 'label_description', gap = 1 },
+            { 'kind_icon', 'kind', gap = 1 },
           },
         },
       },
@@ -32,17 +32,17 @@ return {
       },
     },
     fuzzy = {
-      sorts = { "score", "kind", "label" },
+      sorts = { 'score', 'kind', 'label' },
     },
     keymap = {
-      preset = "default",
-      ["<Up>"] = { "select_prev", "fallback" },
-      ["<Down>"] = { "select_next", "fallback" },
-      ["<C-n>"] = {},
-      ["<C-p>"] = {},
-      ["<Tab>"] = { "select_and_accept", "fallback" },
-      ["<CR>"] = { "select_and_accept", "fallback" },
-      ["<Esc>"] = { "hide", "fallback" },
+      preset = 'default',
+      ['<Up>'] = { 'select_prev', 'fallback' },
+      ['<Down>'] = { 'select_next', 'fallback' },
+      ['<C-n>'] = {},
+      ['<C-p>'] = {},
+      ['<Tab>'] = { 'select_and_accept', 'fallback' },
+      -- ["<CR>"] = { "select_and_accept", "fallback" },
+      ['<Esc>'] = { 'hide', 'fallback' },
     },
 
     cmdline = {
