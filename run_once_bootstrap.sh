@@ -4,7 +4,7 @@ sudo apt update && sudo apt upgrade -y
 mkdir ~/.local/src/
 
 SCRIPTS=(
-# testing
+    # testing
     "nvim.sh"
     "tmux.sh"
     "alacritty.sh"
@@ -21,6 +21,7 @@ SCRIPTS=(
     "custom-scripts-deps.sh"
     "nvm.sh"
     "zoxide.sh"
+    "thefuck.sh"
 )
 
 SUCCESS=()
@@ -29,7 +30,7 @@ FAILED=()
 for SCRIPT in "${SCRIPTS[@]}"; do
     PATH_S="$HOME/.local/share/chezmoi/.bootstrap/$SCRIPT"
     chmod +x "$PATH_S"
-    
+
     if "$PATH_S"; then
         SUCCESS+=("$SCRIPT")
     else

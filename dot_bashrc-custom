@@ -61,3 +61,5 @@ stream_ssh() {
 
     kill $play_pid 2>/dev/null
 }
+
+eval "$(thefuck --alias)"
