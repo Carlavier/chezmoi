@@ -103,10 +103,6 @@ return {
             vim.lsp.buf.code_action,
             { buffer = event.buf, desc = 'Code actions' }
           )
-
-          vim.keymap.set('n', '<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, { buffer = event.buf, desc = 'Toggle inlay hints' })
         end,
       })
 
