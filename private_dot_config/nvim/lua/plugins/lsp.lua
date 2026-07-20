@@ -15,6 +15,17 @@ local servers = {
         format = { enable = false },
       },
     },
+    on_clear_imports = function(bufnr)
+      vim.keymap.set('n', '<leader>co', function()
+        vim.lsp.buf.code_action({
+          apply = true,
+          context = {
+            only = { 'source.organizeImports' },
+            diagnostics = {},
+          },
+        })
+      end, { buffer = bufnr, desc = 'Clear unused imports' })
+    end,
   },
 
   emmet_language_server = {
@@ -45,6 +56,16 @@ local servers = {
       completeUnimported = true,
       clangdFileStatus = true,
     },
+    on_clear_imports = function(bufnr)
+      vim.keymap.set('n', '<leader>co', function()
+        vim.lsp.buf.code_action({
+          apply = true,
+          filter = function(action)
+            return action.title == 'Fix all include-cleaner findings'
+          end,
+        })
+      end, { buffer = bufnr, desc = 'Clear unused includes' })
+    end,
   },
 
   basedpyright = {
@@ -65,6 +86,14 @@ local servers = {
         },
       },
     },
+    on_clear_imports = function(bufnr)
+      vim.keymap.set('n', '<leader>co', function()
+        vim.lsp.buf.code_action({
+          apply = true,
+          context = { only = { 'source.organizeImports' } },
+        })
+      end, { buffer = bufnr, desc = 'Clear unused imports' })
+    end,
   },
 }
 
@@ -103,6 +132,16 @@ return {
             vim.lsp.buf.code_action,
             { buffer = event.buf, desc = 'Code actions' }
           )
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if not client then
+            return
+          end
+
+          local server_config = servers[client.name]
+          if server_config and server_config.on_clear_imports then
+            server_config.on_clear_imports(event.buf)
+          end
         end,
       })
 
